@@ -43,6 +43,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.SYNC_TOKEN }}
       run: |
+        git status
         orgs=${{ steps.read-config.outputs.orgs }}
         IFS=',' read -r -a org_array <<< "$orgs"
         for org in "${org_array[@]}"
