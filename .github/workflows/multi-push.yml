@@ -24,10 +24,11 @@ jobs:
     - name: Read config.yaml
       id: read-config
       run: |
-        import yaml
+        python -c "import yaml
         with open('config.yaml', 'r') as file:
           config = yaml.load(file)
         print(f"::set-output name=orgs::{config['orgs']}")
+        "
 
     - name: Push to remotes
       env:
