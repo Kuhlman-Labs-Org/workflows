@@ -31,7 +31,7 @@ jobs:
 
     - name: Push to remotes
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.SYNC_TOKEN }}
       run: |
         orgs=${{ steps.read-config.outputs.orgs }}
         IFS=',' read -r -a org_array <<< "$orgs"
