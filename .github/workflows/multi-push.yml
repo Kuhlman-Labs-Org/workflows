@@ -19,14 +19,14 @@ jobs:
         python-version: '3.x'
 
     - name: Install PyYAML
-      run: pip install pyyaml
+      run: pip install PyYAML
 
     - name: Read config.yaml
       id: read-config
       run: |
         import yaml
         with open('config.yaml', 'r') as file:
-          config = yaml.safe_load(file)
+          config = yaml.load(file)
         print(f"::set-output name=orgs::{config['orgs']}")
 
     - name: Push to remotes
