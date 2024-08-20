@@ -43,7 +43,7 @@ jobs:
       env:
         SYNC_TOKEN: ${{ secrets.SYNC_TOKEN }}
       run: |
-        cat $SYNC_TOKEN
+        echo $SYNC_TOKEN
         git status
         orgs=${{ steps.read-config.outputs.orgs }}
         IFS=',' read -r -a org_array <<< "$orgs"
