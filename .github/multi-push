@@ -3,7 +3,7 @@ name: Multi-Remote Push
 on:
   push:
     paths:
-      - '.github/workflows/**'
+      - 'workflows/**'
 
 jobs:
   push-to-remotes:
@@ -39,6 +39,6 @@ jobs:
         do
           remote_url="https://x-access-token:${GITHUB_TOKEN}@github.com/${org}/$(basename $GITHUB_REPOSITORY).git"
           git remote add $org $remote_url
-          git push $org --all
-          git push $org --tags
+          git push $org --all -f
+          git push $org --tags -f
         done
