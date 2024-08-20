@@ -41,14 +41,15 @@ jobs:
         "
     - name: Push to remotes
       env:
-        GITHUB_TOKEN: ${{ secrets.SYNC_TOKEN }}
+        SYNC_TOKEN: ${{ secrets.SYNC_TOKEN }}
       run: |
+        cat ${SYNC_TOKEN}
         git status
         orgs=${{ steps.read-config.outputs.orgs }}
         IFS=',' read -r -a org_array <<< "$orgs"
         for org in "${org_array[@]}"
         do
-          remote_url="https://x-access-token:${GITHUB_TOKEN}@github.com/${org}/$(basename $GITHUB_REPOSITORY).git"
+          remote_url="https://x-access-token:${SYNC_TOKEN}@github.com/${org}/$(basename $GITHUB_REPOSITORY).git"
           git remote add $org $remote_url
           git push $org --all -f
           git push $org --tags -f
