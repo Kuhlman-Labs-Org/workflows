@@ -24,12 +24,21 @@ jobs:
     - name: Read config.yaml
       id: read-config
       run: |
-        python -c "import yaml
-        with open('config.yaml', 'r') as file:
-          config = yaml.load(file)
-        print(f"::set-output name=orgs::{config['orgs']}")
-        "
+        python -c "
+import os
+import yaml
 
+# Load the config.yaml file
+with open('config.yaml', 'r') as file:
+    config = yaml.safe_load(file)
+
+# Get the orgs from the config
+orgs = ','.join(config['orgs'])
+
+# Set the output
+with open(os.environ['GITHUB_OUTPUT'], 'a') as output_file:
+    output_file.write(f'orgs={orgs}\n')
+        "
     - name: Push to remotes
       env:
         GITHUB_TOKEN: ${{ secrets.SYNC_TOKEN }}
